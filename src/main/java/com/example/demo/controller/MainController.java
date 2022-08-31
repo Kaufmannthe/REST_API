@@ -2,16 +2,15 @@ package com.example.demo.controller;
 
 import com.example.demo.model.Sensor;
 import com.example.demo.service.SensorService;
-import io.swagger.v3.oas.annotations.ExternalDocumentation;
-import io.swagger.v3.oas.annotations.OpenAPIDefinition;
-import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/v1")
+@RequestMapping("/admin")
+@SecurityRequirement(name = "Administrator")
 public class MainController {
     private final SensorService service;
 
