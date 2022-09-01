@@ -24,8 +24,7 @@ public class SpringSecurityConfig {
     @Bean
     protected SecurityFilterChain config(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/swagger-ui/index.html#/," +
-                        "/swagger-ui/index.html#/main-controller/allSensors").permitAll()
+                .antMatchers("/swagger-ui/index.html#/**").permitAll()
                 .anyRequest().authenticated().and().formLogin();
         return http.build();
     }
@@ -36,5 +35,12 @@ public class SpringSecurityConfig {
         UserDetails admin = User.builder().username("Admin")
                 .password(passwordEncoder().encode("2222")).roles("Administrator").build();
         return new InMemoryUserDetailsManager(admin);
+    }
+
+    @Bean
+    protected InMemoryUserDetailsManager userDetailsManager() {
+        UserDetails user = User.builder().username("User")
+                .password(passwordEncoder().encode("1111")).roles("Viewer").build();
+        return new InMemoryUserDetailsManager(user);
     }
 }
