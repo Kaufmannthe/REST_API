@@ -13,4 +13,6 @@ public interface SensorRepository {
     void save(Sensor sensor);
 
     void delete(Sensor sensor);
+
+    Sensor findById(long id);
 }
