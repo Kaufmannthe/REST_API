@@ -7,20 +7,17 @@ import com.example.demo.model.Unit;
 import com.example.demo.model.dto.SensorDto;
 import com.example.demo.service.SensorService;
 import com.example.demo.util.SensorConvertor;
-import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 
 @RestController
 @RequestMapping("/test")
-public class MyController {
+public class MyRestController {
     private final SensorService service;
 
     @Autowired
-    public MyController(SensorService service) {
+    public MyRestController(SensorService service) {
         this.service = service;
     }
 
@@ -64,8 +61,5 @@ public class MyController {
     private void delete(@PathVariable int id, @RequestBody Sensor sensor) {
         service.delete(sensor);
     }
-
-
-
 
 }
