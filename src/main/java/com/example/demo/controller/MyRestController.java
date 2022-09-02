@@ -5,6 +5,7 @@ import com.example.demo.model.Sensor;
 import com.example.demo.model.Type;
 import com.example.demo.model.Unit;
 import com.example.demo.model.dto.SensorDto;
+import com.example.demo.model.dto.SensorDtoUpdate;
 import com.example.demo.service.SensorService;
 import com.example.demo.util.SensorConvertor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,15 +55,17 @@ public class MyRestController {
     }
 
     @PreAuthorize("hasAuthority('Administrator')")
-    @PutMapping("/admin/update/{id}")
-    private void update(@PathVariable int id, @RequestBody Sensor sensor) {
+    @PutMapping("/admin/update")
+    private Sensor update(@RequestBody SensorDtoUpdate SensorDtoUpdate) {
+        Sensor sensor = SensorConvertor.convertToSensor(SensorDtoUpdate);
         service.update(sensor);
+        return sensor;
     }
 
     @PreAuthorize("hasAuthority('Administrator')")
     @DeleteMapping("/admin/delete/{id}")
-    private void delete(@PathVariable int id, @RequestBody Sensor sensor) {
-        service.delete(sensor);
+    private void delete(@PathVariable int id, @RequestBody SensorDto sensorDto) {
+        /*service.delete(sensor);*/
     }
 
 }
