@@ -8,6 +8,7 @@ import com.example.demo.model.dto.SensorDto;
 import com.example.demo.service.SensorService;
 import com.example.demo.util.SensorConvertor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -21,12 +22,11 @@ public class MyRestController {
         this.service = service;
     }
 
-
     @GetMapping("/")
     @ResponseBody
     public Sensor getSensor() {
-        return new Sensor(1, "Artem", "Bohan", Type.HUMIDITY, Unit.BAR, "Minsk",
-                new Range(1, 10, 30), "????");
+        return new Sensor("Artem", "Bohan", new Range(1, 10, 30), Type.HUMIDITY, Unit.BAR,
+                "Minsk", "????");
     }
 
 
@@ -37,27 +37,25 @@ public class MyRestController {
         return service.allSensors();
     }*/
 
-    @GetMapping("/sensor/{id}")
+/*    @GetMapping("/sensor/{id}")
     @ResponseBody
     public Sensor findById(@PathVariable long id){
         return service.findById(id);
-    }
-
+    }*/
 
     @PostMapping("/add")
-    public void add(@RequestBody SensorDto sensorDto) {
+    public Sensor add(@RequestBody SensorDto sensorDto) {
         Sensor sensor = SensorConvertor.convertToSensor(sensorDto);
-        service.save(sensor);
+        service.save(sensor);;
+        return sensor;
     }
 
-
-    @PutMapping("/{id}")
+    @PutMapping("/update/{id}")
     private void update(@PathVariable int id, @RequestBody Sensor sensor) {
         service.update(sensor);
     }
 
-
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     private void delete(@PathVariable int id, @RequestBody Sensor sensor) {
         service.delete(sensor);
     }

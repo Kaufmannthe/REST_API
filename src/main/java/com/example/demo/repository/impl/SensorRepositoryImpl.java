@@ -36,6 +36,7 @@ public class SensorRepositoryImpl implements SensorRepository {
     @Override
     public void save(Sensor sensor) {
         Session session = sessionFactory.getCurrentSession();
+
         session.save(sensor);
     }
 

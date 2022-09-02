@@ -2,7 +2,6 @@ package com.example.demo.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
 
@@ -30,29 +29,30 @@ public class Sensor {
     @Column(length = 15, nullable = false)
     private String model;
 
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, optional = false)
+    @JoinColumn(name = "range_id")
+    private Range range;
     @NotNull
+    @Enumerated(EnumType.STRING)
     private Type type;
-
+    @Enumerated(EnumType.STRING)
     private Unit unit;
 
     @Length(min = 1, max = 40)
     @Column(length = 40)
     private String location;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, optional = false)
-    private Range range;
-
     @Length(min = 1, max = 200)
     @Column(length = 200, nullable = false)
     private String description;
 
-    public Sensor(String title, String model, Type type, Unit unit, String location, Range range, String description) {
+    public Sensor(String title, String model, Range range, Type type, Unit unit, String location, String description) {
         this.title = title;
         this.model = model;
+        this.range = range;
         this.type = type;
         this.unit = unit;
         this.location = location;
-        this.range = range;
         this.description = description;
     }
 }

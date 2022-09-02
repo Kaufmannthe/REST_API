@@ -9,6 +9,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class RangeDto {
 
-    private int to;
     private int from;
+    private int to;
 }

@@ -17,10 +17,10 @@ public class Range{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    private int rangeTo;
     private int rangeFrom;
+    private int rangeTo;
 
-    public Range(int rangeTo, int rangeFrom) {
+    public Range(int rangeFrom, int rangeTo) {
         this.rangeTo = rangeTo;
         this.rangeFrom = rangeFrom;
     }

@@ -10,7 +10,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 public class SensorDto {
-
     private String title;
     private String model;
     private RangeDto range;
