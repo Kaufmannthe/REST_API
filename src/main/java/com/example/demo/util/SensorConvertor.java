@@ -19,9 +19,9 @@ public class SensorConvertor {
     }
 
     public static Sensor convertToSensor(SensorDtoUpdate sensorDto) {
-        /*Range range = new Range(sensorDto.getRange().getFrom(), sensorDto.getRange().getTo());*/
 
-        return new Sensor(sensorDto.getTitle(),
+        return new Sensor(sensorDto.getId(),
+                sensorDto.getTitle(),
                 sensorDto.getModel(),
                 new Range(sensorDto.getRange().getFrom(), sensorDto.getRange().getTo()),
                 sensorDto.getType(),
