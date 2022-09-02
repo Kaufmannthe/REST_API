@@ -8,6 +8,7 @@ import com.example.demo.model.dto.SensorDto;
 import com.example.demo.service.SensorService;
 import com.example.demo.util.SensorConvertor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,7 +23,7 @@ public class MyRestController {
         this.service = service;
     }
 
-    @GetMapping("/")
+    @GetMapping("/all")
     @ResponseBody
     public Sensor getSensor() {
         return new Sensor("Artem", "Bohan", new Range(1, 10, 30), Type.HUMIDITY, Unit.BAR,
@@ -43,19 +44,23 @@ public class MyRestController {
         return service.findById(id);
     }*/
 
-    @PostMapping("/add")
+    @PreAuthorize("hasAuthority('Administrator')")
+    @PostMapping("/admin/add")
+    @ResponseStatus(HttpStatus.CREATED)
     public Sensor add(@RequestBody SensorDto sensorDto) {
         Sensor sensor = SensorConvertor.convertToSensor(sensorDto);
         service.save(sensor);;
         return sensor;
     }
 
-    @PutMapping("/update/{id}")
+    @PreAuthorize("hasAuthority('Administrator')")
+    @PutMapping("/admin/update/{id}")
     private void update(@PathVariable int id, @RequestBody Sensor sensor) {
         service.update(sensor);
     }
 
-    @DeleteMapping("/delete/{id}")
+    @PreAuthorize("hasAuthority('Administrator')")
+    @DeleteMapping("/admin/delete/{id}")
     private void delete(@PathVariable int id, @RequestBody Sensor sensor) {
         service.delete(sensor);
     }

@@ -2,7 +2,6 @@ package com.example.demo.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -24,42 +23,36 @@ public class SpringSecurityConfig {
         return new BCryptPasswordEncoder();
     }
 
+
     @Bean
-    protected SecurityFilterChain config(HttpSecurity http) throws Exception {
-        http
-                .httpBasic()
+    protected SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        http.authorizeRequests()
+                .antMatchers("/all").hasAnyAuthority("Administrator", "Viewer")
+                .antMatchers("/**").permitAll()
+                .and().httpBasic()
+                .and().csrf().disable()
+                .formLogin().loginPage("/login").permitAll()
                 .and()
-                .authorizeRequests()
-                .antMatchers(HttpMethod.GET, "/swagger/**").hasRole("Viewer")
-                .antMatchers(HttpMethod.POST, "/swagger/**").hasRole("Administrator")
-                .antMatchers(HttpMethod.PUT, "/swagger/**").hasRole("Administrator")
-                .antMatchers(HttpMethod.DELETE, "/swagger/**").hasRole("Administrator")
-                .and()
-                .csrf().disable()
-                .formLogin().loginPage("/login");
-              /*  .authorizeRequests()
-                .antMatchers("/swagger/**").permitAll()
-                .anyRequest().authenticated()
-                .and()
-                .formLogin()
-                .loginPage("/login")
-                .permitAll();*/
+                .logout().permitAll();
         return http.build();
     }
-
-
 
     @Bean
     protected InMemoryUserDetailsManager userDetailsManager() {
         InMemoryUserDetailsManager inMemoryUserDetailsManager = new InMemoryUserDetailsManager();
-        UserDetails admin = User.builder().username("Admin")
-                .password(passwordEncoder().encode("2222")).roles("Viewer","Administrator").build();
-        UserDetails user = User.builder().username("User")
-                .password(passwordEncoder().encode("1111")).roles("Viewer").build();
+        UserDetails admin = User.builder()
+                .username("admin")
+                .password(passwordEncoder().encode("admin"))
+                .roles("Administrator").authorities("Administrator").build();
+
+        UserDetails user = User.builder()
+                .username("user")
+                .password(passwordEncoder().encode("user"))
+                .roles("Viewer").authorities("Viewer").build();
+
         inMemoryUserDetailsManager.createUser(admin);
         inMemoryUserDetailsManager.createUser(user);
         return inMemoryUserDetailsManager;
     }
-
 
 }
