@@ -13,6 +13,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 
 @RestController
 @RequestMapping("/test")
@@ -26,18 +28,9 @@ public class MyRestController {
 
     @GetMapping("/all")
     @ResponseBody
-    public Sensor getSensor() {
-        return new Sensor("Artem", "Bohan", new Range(1, 10, 30), Type.HUMIDITY, Unit.BAR,
-                "Minsk", "????");
-    }
-
-
-
-/*    @GetMapping("/")
-    @ResponseBody
     public List<Sensor> allSensors() {
         return service.allSensors();
-    }*/
+    }
 
 /*    @GetMapping("/sensor/{id}")
     @ResponseBody
@@ -56,16 +49,16 @@ public class MyRestController {
 
     @PreAuthorize("hasAuthority('Administrator')")
     @PutMapping("/admin/update")
-    private Sensor update(@RequestBody SensorDtoUpdate SensorDtoUpdate) {
+    public void update(@RequestBody SensorDtoUpdate SensorDtoUpdate) {
         Sensor sensor = SensorConvertor.convertToSensor(SensorDtoUpdate);
         service.update(sensor);
-        return sensor;
     }
 
     @PreAuthorize("hasAuthority('Administrator')")
-    @DeleteMapping("/admin/delete/{id}")
-    private void delete(@PathVariable int id, @RequestBody SensorDto sensorDto) {
-        /*service.delete(sensor);*/
+    @DeleteMapping("/admin/delete")
+    public void delete(@RequestBody SensorDtoUpdate sensorDto) {
+        Sensor sensor = SensorConvertor.convertToSensor(sensorDto);
+        service.delete(sensor.getId());
     }
 
 }

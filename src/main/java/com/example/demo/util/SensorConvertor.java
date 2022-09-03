@@ -23,7 +23,7 @@ public class SensorConvertor {
         return new Sensor(sensorDto.getId(),
                 sensorDto.getTitle(),
                 sensorDto.getModel(),
-                new Range(sensorDto.getRange().getFrom(), sensorDto.getRange().getTo()),
+                new Range(sensorDto.getId(), sensorDto.getRange().getFrom(), sensorDto.getRange().getTo()),
                 sensorDto.getType(),
                 sensorDto.getUnit(),
                 sensorDto.getLocation(),

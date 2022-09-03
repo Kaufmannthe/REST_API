@@ -4,7 +4,6 @@ import com.example.demo.model.Sensor;
 import com.example.demo.repository.SensorRepository;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -30,7 +29,7 @@ public class SensorRepositoryImpl implements SensorRepository {
     @Override
     public void update(Sensor sensor) {
         Session session = sessionFactory.getCurrentSession();
-        session.update(sensor);
+        session.merge(sensor);
     }
 
     @Override
@@ -40,9 +39,9 @@ public class SensorRepositoryImpl implements SensorRepository {
     }
 
     @Override
-    public void delete(Sensor sensor) {
+    public void delete(long id) {
         Session session = sessionFactory.getCurrentSession();
-        session.delete(sensor);
+        session.delete(id);
     }
 
     @Override

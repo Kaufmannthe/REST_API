@@ -12,6 +12,6 @@ public interface SensorService {
 
     void save(Sensor sensor);
 
-    void delete(Sensor sensor);
+    void delete(long id);
     Sensor findById(long id);
 }

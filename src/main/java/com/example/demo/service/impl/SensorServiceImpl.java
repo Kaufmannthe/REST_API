@@ -6,6 +6,7 @@ import com.example.demo.service.SensorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
@@ -34,8 +35,8 @@ public class SensorServiceImpl implements SensorService {
     }
 
     @Override
-    public void delete(Sensor sensor) {
-        repository.delete(sensor);
+    public void delete(long id) {
+        repository.delete(id);
     }
 
     @Override

@@ -30,7 +30,7 @@ public class Sensor {
     private String model;
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, optional = false)
-    @JoinColumn(name = "range_id")
+    /*@JoinColumn(name = "range_id")*/
     private Range range;
     @NotNull
     @Enumerated(EnumType.STRING)
