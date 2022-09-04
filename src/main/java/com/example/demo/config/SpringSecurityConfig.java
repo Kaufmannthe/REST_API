@@ -27,13 +27,12 @@ public class SpringSecurityConfig {
     @Bean
     protected SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/all").hasAnyAuthority("Administrator", "Viewer")
-                .antMatchers("/**").permitAll()
+                .antMatchers("/all", "/swagger-ui")
+                .hasAnyAuthority("Administrator", "Viewer")
+                .antMatchers("/**", "/my-rest-controller/**").authenticated()
+                .and().formLogin().loginPage("/login").permitAll()
                 .and().httpBasic()
-                .and().csrf().disable()
-                .formLogin().loginPage("/login").permitAll()
-                .and()
-                .logout().permitAll();
+                .and().csrf().disable();
         return http.build();
     }
 

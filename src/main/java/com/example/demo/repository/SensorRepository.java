@@ -1,7 +1,6 @@
 package com.example.demo.repository;
 
 import com.example.demo.model.Sensor;
-
 import java.util.List;
 
 public interface SensorRepository {

@@ -29,4 +29,5 @@ public class SensorDto {
         this.location = location;
         this.description = description;
     }
+
 }

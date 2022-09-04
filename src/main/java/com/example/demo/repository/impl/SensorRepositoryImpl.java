@@ -7,11 +7,11 @@ import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Repository
+
 public class SensorRepositoryImpl implements SensorRepository {
 
     private final SessionFactory sessionFactory;
@@ -27,11 +27,11 @@ public class SensorRepositoryImpl implements SensorRepository {
         return session.createQuery("FROM Sensor ", Sensor.class).list();
     }
 
-    @Transactional
     @Override
     public void update(Sensor sensor) {
         Session session = sessionFactory.getCurrentSession();
-        session.saveOrUpdate(sensor);
+        session.update(sensor);
+
     }
 
     @Override
@@ -43,7 +43,9 @@ public class SensorRepositoryImpl implements SensorRepository {
     @Override
     public void delete(long id) {
         Session session = sessionFactory.getCurrentSession();
-        session.delete(id);
+        Sensor sensor = findById(id);
+        session.delete(sensor);
+        session.flush();
     }
 
     @Override

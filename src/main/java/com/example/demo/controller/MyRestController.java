@@ -4,6 +4,8 @@ import com.example.demo.model.Sensor;
 import com.example.demo.model.dto.SensorDto;
 import com.example.demo.service.SensorService;
 import com.example.demo.util.SensorConvertor;
+import io.swagger.v3.oas.annotations.OpenAPIDefinition;
+import io.swagger.v3.oas.annotations.info.Info;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +15,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/test")
+@OpenAPIDefinition(info = @Info(title = "Rest Controller", version = "1.0", description = "Rest API"))
 public class MyRestController {
     private final SensorService service;
 
@@ -27,17 +30,11 @@ public class MyRestController {
         return service.allSensors();
     }
 
-/*    @GetMapping("/sensor/{id}")
-    @ResponseBody
-    public Sensor findById(@PathVariable long id){
-        return service.findById(id);
-    }*/
-
     @PreAuthorize("hasAuthority('Administrator')")
     @PostMapping("/admin/add")
     public Sensor add(@RequestBody SensorDto sensorDto) {
         Sensor sensor = SensorConvertor.convertToSensor(sensorDto);
-        service.save(sensor);;
+        service.save(sensor);
         return sensor;
     }
 
@@ -50,10 +47,10 @@ public class MyRestController {
     }
 
     @PreAuthorize("hasAuthority('Administrator')")
-    @DeleteMapping("/admin/delete")
-    public void delete(@RequestBody SensorDto sensorDto) {
-        Sensor sensor = SensorConvertor.convertToSensor(sensorDto);
-        service.delete(sensor.getId());
+    @DeleteMapping("/admin/delete/{id}")
+    public long delete(@PathVariable long id) {
+        service.delete(id);
+        return id;
     }
 
 }

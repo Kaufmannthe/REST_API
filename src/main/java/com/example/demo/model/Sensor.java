@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
@@ -31,8 +33,7 @@ public class Sensor {
     @Column(length = 15, nullable = false)
     private String model;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, optional = false, orphanRemoval = true)
-    /*@JoinColumn(name = "range_id")*/
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, optional = false)
     private Range range;
     @NotNull
     @Enumerated(EnumType.STRING)
@@ -57,4 +58,5 @@ public class Sensor {
         this.location = location;
         this.description = description;
     }
+
 }
