@@ -10,6 +10,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 public class SensorDto {
+
+    private long id;
     private String title;
     private String model;
     private RangeDto range;
@@ -18,4 +20,13 @@ public class SensorDto {
     private String location;
     private String description;
 
+    public SensorDto(String title, String model, RangeDto range, Type type, Unit unit, String location, String description) {
+        this.title = title;
+        this.model = model;
+        this.range = range;
+        this.type = type;
+        this.unit = unit;
+        this.location = location;
+        this.description = description;
+    }
 }

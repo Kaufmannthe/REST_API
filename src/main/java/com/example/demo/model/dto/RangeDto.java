@@ -9,6 +9,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class RangeDto {
 
-    private int from;
-    private int to;
+    private long id;
+    private int rangeFrom;
+    private int rangeTo;
+
+    public RangeDto(int rangeFrom, int rangeTo) {
+        this.rangeFrom = rangeFrom;
+        this.rangeTo = rangeTo;
+    }
 }

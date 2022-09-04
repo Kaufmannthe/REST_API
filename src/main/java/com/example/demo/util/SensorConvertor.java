@@ -3,30 +3,30 @@ package com.example.demo.util;
 import com.example.demo.model.Range;
 import com.example.demo.model.Sensor;
 import com.example.demo.model.dto.SensorDto;
-import com.example.demo.model.dto.SensorDtoUpdate;
 
 public class SensorConvertor {
     public static Sensor convertToSensor(SensorDto sensorDto) {
-        /*Range range = new Range(sensorDto.getRange().getFrom(), sensorDto.getRange().getTo());*/
+        Range range = new Range(sensorDto.getRange().getRangeFrom(), sensorDto.getRange().getRangeTo());
 
         return new Sensor(sensorDto.getTitle(),
                 sensorDto.getModel(),
-                new Range(sensorDto.getRange().getFrom(), sensorDto.getRange().getTo()),
+                new Range(range.getRangeFrom(), range.getRangeTo()),
                 sensorDto.getType(),
                 sensorDto.getUnit(),
                 sensorDto.getLocation(),
                 sensorDto.getDescription());
     }
 
-    public static Sensor convertToSensor(SensorDtoUpdate sensorDto) {
+    public static Sensor sensorUpdate(SensorDto sensor) {
 
-        return new Sensor(sensorDto.getId(),
-                sensorDto.getTitle(),
-                sensorDto.getModel(),
-                new Range(sensorDto.getId(), sensorDto.getRange().getFrom(), sensorDto.getRange().getTo()),
-                sensorDto.getType(),
-                sensorDto.getUnit(),
-                sensorDto.getLocation(),
-                sensorDto.getDescription());
+        return new Sensor(sensor.getId(),
+                sensor.getTitle(),
+                sensor.getModel(),
+                new Range(sensor.getRange().getId(), sensor.getRange().getRangeFrom(), sensor.getRange().getRangeTo()),
+                sensor.getType(),
+                sensor.getUnit(),
+                sensor.getLocation(),
+                sensor.getDescription());
+
     }
 }
