@@ -13,25 +13,25 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 
-@RestController
-@RequestMapping("/test")
-@OpenAPIDefinition(info = @Info(title = "Rest Controller", version = "1.0", description = "Rest API"))
-public class MyRestController {
+@org.springframework.web.bind.annotation.RestController
+@RequestMapping("/api")
+@OpenAPIDefinition(info = @Info(title = "REST Controller", version = "1.0", description = "REST API"))
+public class RestController {
     private final SensorService service;
 
     @Autowired
-    public MyRestController(SensorService service) {
+    public RestController(SensorService service) {
         this.service = service;
     }
 
-    @GetMapping("/all")
+    @GetMapping("/sensors")
     @ResponseBody
     public List<Sensor> allSensors() {
         return service.allSensors();
     }
 
     @PreAuthorize("hasAuthority('Administrator')")
-    @PostMapping("/admin/add")
+    @PostMapping("/admin/sensor")
     public Sensor add(@RequestBody SensorDto sensorDto) {
         Sensor sensor = SensorConvertor.convertToSensor(sensorDto);
         service.save(sensor);
@@ -39,18 +39,16 @@ public class MyRestController {
     }
 
     @PreAuthorize("hasAuthority('Administrator')")
-    @PutMapping("/admin/update")
-    public Sensor update(@RequestBody SensorDto sensorDto) {
+    @PutMapping("/admin/sensor")
+    public void update(@RequestBody SensorDto sensorDto) {
         Sensor sensor = SensorConvertor.sensorUpdate(sensorDto);
         service.update(sensor);
-        return sensor;
     }
 
     @PreAuthorize("hasAuthority('Administrator')")
-    @DeleteMapping("/admin/delete/{id}")
-    public long delete(@PathVariable long id) {
-        service.delete(id);
-        return id;
+    @DeleteMapping("/admin/sensor/{sensorId}")
+    public void delete(@PathVariable long sensorId) {
+        service.delete(sensorId);
     }
 
     @GetMapping("/search")

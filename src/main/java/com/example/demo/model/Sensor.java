@@ -7,9 +7,6 @@ import lombok.NoArgsConstructor;
 import org.hibernate.search.annotations.Field;
 import org.hibernate.search.annotations.FieldBridge;
 import org.hibernate.search.annotations.Indexed;
-import org.hibernate.search.annotations.TermVector;
-import org.hibernate.search.bridge.StringBridge;
-import org.hibernate.search.bridge.builtin.EnumBridge;
 import org.hibernate.search.bridge.builtin.LongBridge;
 import org.hibernate.validator.constraints.Length;
 
@@ -46,13 +43,9 @@ public class Sensor {
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, optional = false)
     private Range range;
     @NotNull
-/*    @Field(name = "sensor_type")
-    @FieldBridge(impl = EnumBridge.class)*/
     @Enumerated(EnumType.STRING)
     private Type type;
 
-/*    @Field(name = "sensor_unit")
-    @FieldBridge(impl = EnumBridge.class)*/
     @Enumerated(EnumType.STRING)
     private Unit unit;
 

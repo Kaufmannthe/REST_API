@@ -64,12 +64,15 @@ public class SensorRepositoryImpl implements SensorRepository {
     @Override
     public List search(String text) throws InterruptedException {
         EntityManager entityManager = sessionFactory.createEntityManager();
+
         FullTextEntityManager fullTextEntityManager
                 = Search.getFullTextEntityManager(entityManager);
+
         QueryBuilder queryBuilder = fullTextEntityManager.getSearchFactory()
                 .buildQueryBuilder()
                 .forEntity(Sensor.class)
                 .get();
+
         org.apache.lucene.search.Query query = queryBuilder
                 .keyword()
                 .fuzzy()
@@ -78,6 +81,7 @@ public class SensorRepositoryImpl implements SensorRepository {
                 .onFields("sensor_id", "title", "model", "location", "description")
                 .matching(text)
                 .createQuery();
+
         FullTextQuery jpaQuery = fullTextEntityManager.createFullTextQuery(query, Sensor.class);
         List result = jpaQuery.getResultList();
         return result;
