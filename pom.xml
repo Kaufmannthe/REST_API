@@ -13,9 +13,6 @@
     <version>0.0.1-SNAPSHOT</version>
     <name>demo1</name>
     <description>demo1</description>
-    <properties>
-        <java.version>18</java.version>
-    </properties>
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -85,6 +82,12 @@
             <artifactId>spring-boot-devtools</artifactId>
             <version>2.7.3</version>
         </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-search-orm</artifactId>
+            <version>5.11.10.Final</version>
+        </dependency>
+
     </dependencies>
     <build>
         <plugins>

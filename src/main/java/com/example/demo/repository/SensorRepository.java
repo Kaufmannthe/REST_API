@@ -14,4 +14,6 @@ public interface SensorRepository {
     void delete(long id);
 
     Sensor findById(long id);
+
+    List search(String text) throws InterruptedException;
 }

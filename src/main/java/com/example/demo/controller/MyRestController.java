@@ -53,4 +53,10 @@ public class MyRestController {
         return id;
     }
 
+    @GetMapping("/search")
+    @ResponseBody
+    public List search(@RequestParam String text) throws InterruptedException {
+        return service.search(text);
+    }
+
 }
