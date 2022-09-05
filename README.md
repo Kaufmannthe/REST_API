@@ -2,7 +2,7 @@
 Maven,
 Spring Boot,
 Spring Security,
-Hibernate ORM,
+Hibernate,
 Hibernate Search,
 PostgreSQL,
 Lombok,
