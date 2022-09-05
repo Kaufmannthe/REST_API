@@ -5,5 +5,5 @@ Spring Security,
 Hibernate ORM,
 Hibernate Search,
 PostgreSQL,
-Lombok
+Lombok,
 HTML
