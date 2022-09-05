@@ -16,7 +16,6 @@ import javax.persistence.EntityManager;
 import java.util.List;
 
 @Repository
-
 public class SensorRepositoryImpl implements SensorRepository {
 
     private final SessionFactory sessionFactory;
