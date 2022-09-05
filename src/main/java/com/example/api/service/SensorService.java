@@ -1,9 +1,10 @@
-package com.example.demo.repository;
+package com.example.api.service;
 
-import com.example.demo.model.Sensor;
+import com.example.api.model.Sensor;
+
 import java.util.List;
 
-public interface SensorRepository {
+public interface SensorService {
 
     List<Sensor> allSensors();
 
@@ -12,8 +13,7 @@ public interface SensorRepository {
     void save(Sensor sensor);
 
     void delete(long id);
-
     Sensor findById(long id);
 
-    List search(String text) throws InterruptedException;
+    List search(String text);
 }

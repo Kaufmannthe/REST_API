@@ -1,4 +1,4 @@
-package com.example.demo.model;
+package com.example.api.model;
 
 public enum Type {
     PRESSURE("Pressure"), VOLTAGE("Voltage"), TEMPERATURE("Temperature"), HUMIDITY("Humidity");

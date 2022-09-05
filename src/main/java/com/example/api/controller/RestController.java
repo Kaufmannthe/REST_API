@@ -1,9 +1,9 @@
-package com.example.demo.controller;
+package com.example.api.controller;
 
-import com.example.demo.model.Sensor;
-import com.example.demo.model.dto.SensorDto;
-import com.example.demo.service.SensorService;
-import com.example.demo.util.SensorConvertor;
+import com.example.api.model.Sensor;
+import com.example.api.model.dto.SensorDto;
+import com.example.api.service.SensorService;
+import com.example.api.util.SensorConvertor;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.info.Info;
 import org.springframework.beans.factory.annotation.Autowired;

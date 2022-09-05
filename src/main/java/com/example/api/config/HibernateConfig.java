@@ -1,4 +1,4 @@
-package com.example.demo.config;
+package com.example.api.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -45,7 +45,7 @@ public class HibernateConfig {
     public LocalSessionFactoryBean sessionFactory() {
         LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
         sessionFactory.setDataSource(dataSource());
-        sessionFactory.setPackagesToScan("com.example.demo.model");
+        sessionFactory.setPackagesToScan("com.example.api.model");
         sessionFactory.setHibernateProperties(hibernateProperties());
         return sessionFactory;
     }

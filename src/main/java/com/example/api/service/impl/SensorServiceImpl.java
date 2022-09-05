@@ -1,8 +1,8 @@
-package com.example.demo.service.impl;
+package com.example.api.service.impl;
 
-import com.example.demo.model.Sensor;
-import com.example.demo.repository.SensorRepository;
-import com.example.demo.service.SensorService;
+import com.example.api.model.Sensor;
+import com.example.api.repository.SensorRepository;
+import com.example.api.service.SensorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -51,7 +51,7 @@ public class SensorServiceImpl implements SensorService {
 
     @Override
     @Transactional
-    public List search(String text) throws InterruptedException {
+    public List search(String text) {
         return repository.search(text);
     }
 

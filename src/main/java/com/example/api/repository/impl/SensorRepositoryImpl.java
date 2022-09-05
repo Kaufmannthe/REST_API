@@ -1,7 +1,7 @@
-package com.example.demo.repository.impl;
+package com.example.api.repository.impl;
 
-import com.example.demo.model.Sensor;
-import com.example.demo.repository.SensorRepository;
+import com.example.api.model.Sensor;
+import com.example.api.repository.SensorRepository;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
@@ -62,7 +62,7 @@ public class SensorRepositoryImpl implements SensorRepository {
     }
 
     @Override
-    public List search(String text) throws InterruptedException {
+    public List search(String text) {       // Hibernate Search
         EntityManager entityManager = sessionFactory.createEntityManager();
 
         FullTextEntityManager fullTextEntityManager

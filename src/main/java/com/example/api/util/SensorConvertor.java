@@ -1,8 +1,8 @@
-package com.example.demo.util;
+package com.example.api.util;
 
-import com.example.demo.model.Range;
-import com.example.demo.model.Sensor;
-import com.example.demo.model.dto.SensorDto;
+import com.example.api.model.Range;
+import com.example.api.model.Sensor;
+import com.example.api.model.dto.SensorDto;
 
 public class SensorConvertor {
     public static Sensor convertToSensor(SensorDto sensorDto) {

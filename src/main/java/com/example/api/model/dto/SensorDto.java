@@ -1,7 +1,7 @@
-package com.example.demo.model.dto;
+package com.example.api.model.dto;
 
-import com.example.demo.model.Type;
-import com.example.demo.model.Unit;
+import com.example.api.model.Type;
+import com.example.api.model.Unit;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
